@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Varughese · IT Operations Service Specialist · ADB SAFEGATE Application</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --bg: #f4f6f9;
+    --accent: #0066B3;
+    --accent2: #004A8A;
+    --adb-blue: #0066B3;
+    --adb-dark: #002D5A;
+    --adb-mid: #004A8A;
+    --adb-light: #C5DCF5;
+    --adb-sky: #E8F3FF;
+    --muted: #6b6560;
+    --rule: #d4cfc9;
+    --card: #e8edf3;
+    --code: #0a0a0a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--adb-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    height: 52px;
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--adb-blue); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--adb-blue); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 50px 70px;
+    position: relative;
+    overflow: hidden;
+    background: var(--adb-dark);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,102,179,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,102,179,0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.7;
+  }
+  .hero-runway {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--adb-blue) 0, var(--adb-blue) 40px, transparent 40px, transparent 60px);
+    opacity: 0.4;
+  }
+  .hero-ticker {
+    position: absolute;
+    top: 52px;
+    left: 0; right: 0;
+    background: var(--adb-blue);
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .hero-ticker-inner {
+    display: inline-block;
+    animation: ticker 32s linear infinite;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--adb-blue);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: normal; color: var(--adb-blue); }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-meta .pill.live {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #fff;
+  }
+  .hero-meta .pill.adb {
+    background: rgba(0,102,179,0.25);
+    border-color: var(--adb-blue);
+    color: var(--adb-blue);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    right: 50px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scroll-hint::before {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: rgba(0,102,179,0.5);
+  }
+
+  .section { padding: 80px 50px; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--adb-blue);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 16px;
+  }
+
+  .metrics {
+    background: var(--adb-dark);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: #1a3a5c;
+  }
+  .metric-item {
+    background: var(--adb-dark);
+    padding: 32px 28px;
+    text-align: center;
+  }
+  .metric-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--adb-blue);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .metric-desc {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .jd-match {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: #1a3a5c;
+    margin-bottom: 40px;
+  }
+  .jd-pane {
+    background: var(--code);
+    padding: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+  .jd-pane .pane-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1f2937;
+  }
+  .jd-pane .k { color: #7dd3fc; }
+  .jd-pane .s { color: #fde68a; }
+  .jd-pane .v { color: #c8f5a0; }
+  .jd-pane .c { color: #4b5563; }
+  .jd-pane .tick { color: #4ade80; }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--bg);
+    margin-bottom: 0;
+  }
+  .cert-card {
+    background: var(--bg);
+    padding: 24px 20px;
+    transition: background 0.2s;
+  }
+  .cert-card:hover { background: var(--card); }
+  .cert-org {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--adb-blue);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .cert-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .cert-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+  .cert-badge {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    padding: 2px 8px;
+    background: var(--ink);
+    color: #4ade80;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+  .cert-badge.preferred { background: var(--adb-blue); color: #fff; }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--rule);
+  }
+  .tl-item {
+    padding-left: 28px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--adb-blue);
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--adb-blue);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .tl-role { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+  .tl-co { font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+  .tl-dept {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border: 1px solid rgba(0,102,179,0.35);
+    color: var(--adb-blue);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tl-points { list-style: none; }
+  .tl-points li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 6px;
+    padding-left: 16px;
+    position: relative;
+    color: #3a3a3a;
+  }
+  .tl-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--adb-blue);
+    font-size: 0.8rem;
+  }
+  .tl-points li strong { color: var(--ink); }
+  .tl-win {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-left: 3px solid #4ade80;
+    background: rgba(74,222,128,0.06);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: #166534;
+    letter-spacing: 0.04em;
+  }
+
+  .skills-matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  .skill-group h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .stag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 4px 9px;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    transition: all 0.15s;
+    cursor: default;
+  }
+  .stag:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .stag.hot { background: var(--adb-blue); border-color: var(--adb-blue); color: #fff; }
+  .stag.core { background: var(--adb-dark); border-color: var(--adb-dark); color: #fff; }
+
+  .select-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #1a3a5c;
+  }
+  .select-card {
+    background: var(--bg);
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+  .select-card:hover { background: var(--card); }
+  .select-org {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--adb-blue);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .select-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+  .select-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  .why-adb {
+    background: var(--adb-dark);
+    padding: 80px 50px;
+  }
+  .why-adb .section-title { color: #fff; border-bottom-color: var(--adb-blue); }
+  .why-adb .section-label { color: var(--adb-blue); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #1a3a5c;
+    margin-top: 40px;
+  }
+  .why-card {
+    background: #012246;
+    padding: 28px 24px;
+    border-top: 3px solid var(--adb-blue);
+  }
+  .why-card .why-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    color: var(--adb-blue);
+    opacity: 0.4;
+    margin-bottom: 12px;
+  }
+  .why-card h3 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .why-card p { font-size: 0.78rem; color: #9ca3af; line-height: 1.6; }
+
+  .contact-section {
+    background: var(--adb-dark);
+    padding: 80px 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .contact-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .contact-section h2 span { color: var(--adb-blue); }
+  .contact-links { display: flex; flex-direction: column; gap: 14px; }
+  .c-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 1px solid #1a3a5c;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .c-link:hover { border-color: var(--adb-blue); background: rgba(0,102,179,0.08); }
+  .c-link .c-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4b5563;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .c-link .c-val { font-size: 0.88rem; color: #fff; font-weight: 600; }
+
+  footer {
+    background: var(--adb-dark);
+    border-top: 1px solid #1a3a5c;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: #4b5563;
+    letter-spacing: 0.06em;
+  }
+  footer p span { color: var(--adb-blue); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 20px 50px; }
+    .section { padding: 60px 20px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .jd-match { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-matrix { grid-template-columns: 1fr; }
+    .select-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .contact-section { grid-template-columns: 1fr; padding: 60px 20px; }
+    .why-adb { padding: 60px 20px; }
+    footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">George <span>Varughese</span></div>
+  <div class="nav-links">
+    <a href="#match">JD Match</a>
+    <a href="#experience">Experience</a>
+    <a href="#why">Why ADB SAFEGATE</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
+    <a href="#selective">Programmes</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-runway"></div>
+  <div class="hero-ticker">
+    <div class="hero-ticker-inner">
+      IT Operations · System Monitoring · SLA Support · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · European Internship Exposure · Dubai UAE · Immediate Start &nbsp;&nbsp; IT Operations · System Monitoring · SLA Support · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · European Internship Exposure · Dubai UAE · Immediate Start &nbsp;&nbsp;
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-kicker">Service Specialist – IT Operations · ADB SAFEGATE · Dubai, UAE  ·  Req ID: 1133</div>
+    <h1>George<br><em>Varughese</em><br>IT Ops.<br>Delivered.</h1>
+    <div class="hero-meta">
+      <span class="pill live">● Available Now</span>
+      <span class="pill adb">ADB SAFEGATE Applicant</span>
+      <span class="pill">Dubai, UAE</span>
+      <span class="pill">Residency Visa</span>
+      <span class="pill">UAE Driving License</span>
+      <span class="pill">AWS Certified</span>
+      <span class="pill">B.Tech CSE — IIIT</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric-item">
+    <div class="metric-num">2</div>
+    <div class="metric-desc">Live Production<br>IT Operations Roles</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-num">7×</div>
+    <div class="metric-desc">Data Error Reduction<br>Live Govt. System</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-num">3</div>
+    <div class="metric-desc">World-Competitive<br>Programme Selections</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-num">500+</div>
+    <div class="metric-desc">Records Managed<br>Zero Downtime</div>
+  </div>
+</div>
+
+<!-- JD MATCH -->
+<section class="section" id="match">
+  <div class="section-label">Role Alignment</div>
+  <div class="section-title">Every Requirement,<br>Already Delivered</div>
+
+  <p style="font-size:0.92rem; color: var(--muted); max-width:700px; margin-bottom:32px; line-height:1.65;">
+    The ADB SAFEGATE Service Specialist – IT Operations job description maps directly to active production work across two simultaneous roles in UAE and Saudi Arabia — plus internship experience at a US-culture MIT-founded AI startup with European cross-team delivery.
+  </p>
+
+  <div class="jd-match">
+    <div class="jd-pane">
+      <div class="pane-label">ADB SAFEGATE — Job Description Requirements</div>
+<span class="c">// Key Responsibilities</span>
+{
+  <span class="k">"first_line_support"</span>: <span class="s">"Provide first-line support for IT issues —</span>
+<span class="s">    hardware, software, network, system</span>
+<span class="s">    troubleshooting"</span>,
+
+  <span class="k">"system_monitoring"</span>: <span class="s">"Monitor IT systems and applications</span>
+<span class="s">    to ensure performance and availability"</span>,
+
+  <span class="k">"maintenance"</span>: <span class="s">"Routine maintenance — updates, patches,</span>
+<span class="s">    backups, system integrity"</span>,
+
+  <span class="k">"service_management"</span>: <span class="s">"ITSM tools — log, track, document</span>
+<span class="s">    incidents; adhere to SLAs"</span>,
+
+  <span class="k">"process_improvement"</span>: <span class="s">"Analyse recurring issues, recommend</span>
+<span class="s">    improvements, implement automation"</span>,
+
+  <span class="k">"user_training"</span>: <span class="s">"Deliver training and guidance to users</span>
+<span class="s">    on IT tools and best practices"</span>,
+
+  <span class="k">"project_support"</span>: <span class="s">"Support upgrades, migrations, new</span>
+<span class="s">    technology implementations"</span>
+}
+    </div>
+    <div class="jd-pane">
+      <div class="pane-label">George Varughese — Live Evidence Mapping</div>
+<span class="c">// Confirmed: performing all in production</span>
+{
+  <span class="k">"first_line_support"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — LIVE DAILY</span>
+  <span class="c">  // Primary support contact for UAE govt clients</span>
+  <span class="c">  // Hardware, software, network, integrations</span>
+
+  <span class="k">"system_monitoring"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — MULTI-SITE</span>
+  <span class="c">  // Proactive health checks across client sites</span>
+  <span class="c">  // Preventive maintenance, alerting, reporting</span>
+
+  <span class="k">"maintenance"</span>: <span class="tick">✓</span> <span class="v">BOTH ROLES — ACTIVE</span>
+  <span class="c">  // Firmware, patches, schema integrity</span>
+  <span class="c">  // Zero downtime maintained throughout</span>
+
+  <span class="k">"service_management"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — SLA-DRIVEN</span>
+  <span class="c">  // JIRA ticketing, incident tracking</span>
+  <span class="c">  // Full documentation + SOPs maintained</span>
+
+  <span class="k">"process_improvement"</span>: <span class="tick">✓</span> <span class="v">EMDAD — 7× IMPROVEMENT</span>
+  <span class="c">  // Root-cause analysis → pipeline rebuild</span>
+  <span class="c">  // 15% error rate → &lt;2% in 6 weeks</span>
+
+  <span class="k">"user_training"</span>: <span class="tick">✓</span> <span class="v">BOTH ROLES — ACTIVE</span>
+  <span class="c">  // Stakeholder-facing technical communication</span>
+  <span class="c">  // Client teams self-sufficient post-handover</span>
+
+  <span class="k">"project_support"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — ONGOING</span>
+  <span class="c">  // New site integrations, system rollouts</span>
+  <span class="c">  // Hardware config, software deployment</span>
+}
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience" style="background: var(--card);">
+  <div class="section-label">Career Track</div>
+  <div class="section-title">Experience</div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-date">May 2025 – Present</div>
+      <div class="tl-role">IT Operations & Infrastructure Support Engineer</div>
+      <div class="tl-co">Reach Group · Dubai, UAE · Full-Time</div>
+      <div class="tl-dept">First-Line & Escalation Support · Government-Sector Clients · Multi-Site UAE</div>
+      <ul class="tl-points">
+        <li><strong>First-line and escalation IT support</strong> — serve as primary technical support contact for UAE government-sector clients, managing and resolving support tickets for hardware, software, network, and integration issues with high first-time fix rates and minimal downtime in SLA-driven environments.</li>
+        <li><strong>Proactive multi-site system monitoring</strong> — conduct regular system health checks across multiple client sites, performing preventive maintenance, firmware/driver updates, and configuration reviews to maintain system integrity before issues escalate.</li>
+        <li><strong>SQL database administration</strong> — maintain production SQL-based databases supporting live operational systems for 500+ active records; apply data validation logic, manage schema integrity, and ensure reliable performance for government workloads.</li>
+        <li><strong>Server-side pipeline & API maintenance</strong> — manage and maintain integrations connecting government platforms to internal systems, handling authentication, data transformation, error handling, and TCP/IP connectivity across distributed environments.</li>
+        <li><strong>Technical documentation</strong> — produce and maintain SOPs, incident logs, data-flow diagrams, configuration records, and handover materials, ensuring all system changes are fully documented and repeatable.</li>
+        <li><strong>Stakeholder communication</strong> — liaise directly with government agency stakeholders to gather technical requirements, troubleshoot escalated issues, and communicate resolutions clearly to non-technical users.</li>
+      </ul>
+      <div class="tl-win">OUTCOME: Live IT operations maintained for multiple UAE government clients — high first-time fix rate, zero downtime, SLA-compliant, fully documented</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Oct 2025 – Present</div>
+      <div class="tl-role">IT Systems Support Lead (Sole Technical Lead)</div>
+      <div class="tl-co">Emdad Human Resources Company (Outsourced) · Riyadh, KSA · Remote from UAE</div>
+      <div class="tl-dept">Mission-Critical System Recovery · Government IT · Incident Response</div>
+      <ul class="tl-points">
+        <li><strong>Mission-critical IT recovery</strong> — deployed as sole engineer on a live government system failure: 500+ active records, 15% data error rate, no documentation, no handover, active production use requiring immediate diagnosis and resolution.</li>
+        <li><strong>Root-cause analysis & full pipeline rebuild</strong> — identified three distinct error categories in the server-side ingestion pipeline; rebuilt validation and processing logic from scratch within six weeks.</li>
+        <li><strong>7× error reduction, zero downtime</strong> — reduced system error rate from 15% to under 2% while maintaining continuous live service throughout the entire remediation period — zero service interruption.</li>
+        <li><strong>Comprehensive post-incident documentation</strong> — produced incident report, root-cause analysis, SOPs, system architecture notes, and handover materials enabling full client-team self-sufficiency.</li>
+        <li><strong>Remote cross-cultural coordination</strong> — coordinated with Saudi IT operations personnel, demonstrating professional communication and discretion on sensitive government configurations.</li>
+      </ul>
+      <div class="tl-win">OUTCOME: 7× data quality improvement as sole engineer — live government system fully recovered, zero service disruption, client fully self-sufficient post-handover</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Aug 2023 – Jun 2024</div>
+      <div class="tl-role">AI Systems Engineer & Technical Support (Internship)</div>
+      <div class="tl-co">Maura · MIT-Founded AI Startup · San Francisco, USA (Remote Internship)</div>
+      <div class="tl-dept">US Engineering Culture · European Counterpart Collaboration · Full Technical Ownership</div>
+      <ul class="tl-points">
+        <li><strong>US-culture technical environment</strong> — built production AI systems from first principles inside a US-headquartered, MIT-founded startup with no existing codebase, no documentation, applying US engineering standards, documentation discipline, and self-directed ownership.</li>
+        <li><strong>European and international collaboration</strong> — coordinated with engineering counterparts in Sweden and the USA across time zones, working simultaneously to European and US engineering standards — the cross-cultural delivery experience directly applicable to ADB SAFEGATE's global operational environment.</li>
+        <li><strong>Cloud backend & API support</strong> — maintained integrations between iOS hardware sensors (ARKit), Firebase cloud backend, and API endpoints, diagnosing and resolving software bugs, hardware-software integration faults, and performance issues across distributed environments.</li>
+      </ul>
+      <div class="tl-win">OUTCOME: Production systems delivered inside a US-culture, MIT-heritage startup — cross-timezone, European counterpart collaboration, full ownership from zero</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY ADB SAFEGATE -->
+<section class="why-adb" id="why">
+  <div class="section-label">Why This Company</div>
+  <div class="section-title">Why ADB SAFEGATE</div>
+  <p style="font-size:0.92rem; color:#9ca3af; max-width:700px; margin-bottom:0; line-height:1.65;">
+    ADB SAFEGATE is not a company I applied to because the role was available. It is a company I am drawn to because of what it does, where it operates, and the standard it holds itself to. Three things specifically:
+  </p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <h3>Aviation Infrastructure Is Mission-Critical IT</h3>
+      <p>ADB SAFEGATE delivers airfield guidance, docking automation, and digital airport operations systems across six continents. The IT operations role here is not commercial IT support — it is the foundation that keeps safety-critical airport infrastructure running. That is precisely the operational standard I have been building toward: environments where downtime is not an inconvenience but a genuine risk. My record of zero-downtime delivery in government and mission-critical environments maps directly to that standard.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <h3>The UAE Aviation Ecosystem Is World-Class</h3>
+      <p>Dubai is home to one of the world's most ambitious and sophisticated aviation ecosystems. Supporting IT operations for a global airport technology company in this specific region — where the infrastructure demands and operational complexity are exceptional — is precisely the context I want to apply my skills in. I hold a valid UAE Residence Visa and UAE Driving License, and I am available for immediate deployment across all UAE sites.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <h3>Innovation, Integrity, Inclusivity — Already How I Operate</h3>
+      <p>ADB SAFEGATE's culture values innovation, integrity, and inclusivity, with a collaborative team environment that encourages growth. These are not values I would need to learn: I built production AI systems inside an MIT startup with zero documentation (innovation), recovered a live government system as sole engineer with full transparency (integrity), and have delivered across UAE, Saudi, Swedish, and US engineering environments (inclusivity). This is how I already work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="section-label">Qualifications</div>
+  <div class="section-title">Certifications —<br>All Active</div>
+  <p style="font-size:0.88rem; color: var(--muted); max-width:620px; margin-bottom:32px; line-height:1.65;">
+    Certifications spanning cloud infrastructure, IT operations, and software engineering — all directly relevant to the ADB SAFEGATE IT Operations technology stack.
+  </p>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <span class="cert-org">Amazon Web Services</span>
+      <div class="cert-name">AWS Cloud Practitioner</div>
+      <div class="cert-desc">Certified cloud infrastructure, networking, services, and security fundamentals — directly applicable to cloud-integrated IT operations, virtualisation environments, and cloud service management</div>
+      <span class="cert-badge preferred">Cloud · Active</span>
+    </div>
+    <div class="cert-card">
+      <span class="cert-org">Meta</span>
+      <div class="cert-name">Meta Developer Certification</div>
+      <div class="cert-desc">Professional-grade software engineering standards, API design, and development discipline — reflects the technical rigour applied to production system delivery and integration support</div>
+      <span class="cert-badge">Active</span>
+    </div>
+    <div class="cert-card">
+      <span class="cert-org">Google</span>
+      <div class="cert-name">IT Support Certificate</div>
+      <div class="cert-desc">End-to-end IT support fundamentals covering hardware, OS, networking, and system administration — directly underpins first-line and escalation support delivery for ADB SAFEGATE</div>
+      <span class="cert-badge preferred">IT Ops · Active</span>
+    </div>
+    <div class="cert-card">
+      <span class="cert-org">McKinsey & Company</span>
+      <div class="cert-name">Forward Programme</div>
+      <div class="cert-desc">Globally competitive selection for analytical problem-solving and operational excellence — reflects the structured, improvement-oriented thinking ADB SAFEGATE's ITIL-aligned service environment demands</div>
+      <span class="cert-badge preferred">Competitive · Global</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills" style="background: var(--card);">
+  <div class="section-label">Capabilities</div>
+  <div class="section-title">Skills Matrix</div>
+  <div class="skills-matrix">
+    <div class="skill-group">
+      <h3>IT Support & Service Management</h3>
+      <div class="skill-tags">
+        <span class="stag hot">First-Line Support</span>
+        <span class="stag hot">Escalation Support</span>
+        <span class="stag hot">Incident Management</span>
+        <span class="stag hot">SLA Management</span>
+        <span class="stag hot">JIRA Ticketing</span>
+        <span class="stag core">ITIL Framework (Awareness)</span>
+        <span class="stag core">Root-Cause Analysis</span>
+        <span class="stag">Remote Support (AnyDesk/RDP)</span>
+        <span class="stag">Knowledge Base Maintenance</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Networking & Security</h3>
+      <div class="skill-tags">
+        <span class="stag hot">TCP/IP</span>
+        <span class="stag hot">DNS · DHCP · VPN</span>
+        <span class="stag hot">Routing & Switching (Cisco)</span>
+        <span class="stag hot">Firewall Configuration</span>
+        <span class="stag hot">LAN/WAN</span>
+        <span class="stag core">NGFW Concepts</span>
+        <span class="stag core">ACLs · VPN Tunnels</span>
+        <span class="stag">CIA Triad · EDR · SIEM</span>
+        <span class="stag">Incident Response</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>OS, Servers & Virtualisation</h3>
+      <div class="skill-tags">
+        <span class="stag hot">Windows Server</span>
+        <span class="stag hot">Linux (Ubuntu/CentOS)</span>
+        <span class="stag hot">macOS</span>
+        <span class="stag hot">Patch & Update Management</span>
+        <span class="stag hot">VMware ESXi (Concepts)</span>
+        <span class="stag core">AWS EC2/VPC</span>
+        <span class="stag core">Active Directory & GPO</span>
+        <span class="stag">Docker (Basics)</span>
+        <span class="stag">Bash Scripting</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Databases, Monitoring & Documentation</h3>
+      <div class="skill-tags">
+        <span class="stag hot">MS SQL Server (MSSQL)</span>
+        <span class="stag hot">PostgreSQL · MySQL</span>
+        <span class="stag hot">System Health Monitoring</span>
+        <span class="stag hot">Proactive Alerting</span>
+        <span class="stag hot">SOPs & Incident Reports</span>
+        <span class="stag core">Architecture Diagrams</span>
+        <span class="stag core">Technical Handovers</span>
+        <span class="stag">Postman API Testing</span>
+        <span class="stag">Backup & Recovery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTIVE PROGRAMMES -->
+<section class="section" id="selective">
+  <div class="section-label">Global Selection · Growth Mindset</div>
+  <div class="section-title">Programmes &<br>Achievements</div>
+  <div class="select-grid">
+    <div class="select-card">
+      <span class="select-org">McKinsey &amp; Company</span>
+      <h3>Forward Programme 2025</h3>
+      <p>Selected from worldwide candidates on analytical capability and growth mindset — McKinsey's competitive leadership and problem-solving programme. Reflects the structured, improvement-oriented thinking and operational discipline that ADB SAFEGATE's ITIL-aligned service delivery culture demands from its IT specialists.</p>
+    </div>
+    <div class="select-card">
+      <span class="select-org">University of Oxford</span>
+      <h3>OxML Summer School 2025</h3>
+      <p>Accepted to Oxford's competitive Machine Learning Summer School from worldwide applicants — rigorous generative AI and ML programme. Signals the level of technical curiosity and continuous learning mindset that drives above-baseline performance in evolving IT operations environments.</p>
+    </div>
+    <div class="select-card">
+      <span class="select-org">Harvard University</span>
+      <h3>HPAIR Delegate 2025</h3>
+      <p>Selected as Harvard Project for Asian and International Relations delegate from thousands of global applicants — on leadership, academic merit, and cross-cultural engagement. Reflects the internationally minded, collaborative profile that ADB SAFEGATE's global operations environment values in its team members.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" style="background: var(--card); padding-top: 0; padding-bottom: 80px;">
+  <div class="section-label">Academic Foundation</div>
+  <div class="section-title">Education</div>
+  <div style="padding-left: 28px; border-left: 2px solid var(--rule);">
+    <div class="tl-date">2021 – 2025</div>
+    <div class="tl-role">B.Tech, Computer Science &amp; Engineering</div>
+    <div class="tl-co">Indian Institute of Information Technology (IIIT) Kottayam</div>
+    <div style="margin-top: 12px;">
+      <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; line-height: 1.9;">
+        Networking &amp; Protocols &nbsp;·&nbsp; System Administration &nbsp;·&nbsp; Databases &nbsp;·&nbsp; Software Engineering &nbsp;·&nbsp; Cloud Computing &nbsp;·&nbsp; Cybersecurity Fundamentals &nbsp;·&nbsp; Embedded Systems &nbsp;·&nbsp; Machine Learning &nbsp;·&nbsp; Data Structures
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div>
+    <h2>Every<br><span>Requirement.</span><br>Already Delivered.</h2>
+    <p style="color:#9ca3af; font-size:0.85rem; margin-top:20px; line-height:1.6; max-width:380px;">
+      Dubai-based, UAE Residency Visa, UAE Driving License, immediate start. The ADB SAFEGATE IT Operations role is not an aspiration — it is the same SLA-driven, multi-site, government-standard IT operations work I am doing today, applied to ADB SAFEGATE's world-class airport technology environment.
+    </p>
+  </div>
+  <div class="contact-links">
+    <a class="c-link" href="mailto:georgevjr03@gmail.com">
+      <div>
+        <span class="c-label">Email</span>
+        <span class="c-val">georgevjr03@gmail.com</span>
+      </div>
+    </a>
+    <a class="c-link" href="tel:+971509382514">
+      <div>
+        <span class="c-label">Phone · WhatsApp</span>
+        <span class="c-val">+971 50 938 2514</span>
+      </div>
+    </a>
+    <a class="c-link" href="https://github.com/georgevjr03" target="_blank">
+      <div>
+        <span class="c-label">GitHub</span>
+        <span class="c-val">github.com/georgevjr03</span>
+      </div>
+    </a>
+    <a class="c-link" href="#">
+      <div>
+        <span class="c-label">Location &amp; Availability</span>
+        <span class="c-val">Dubai, UAE — Residency Visa — UAE Driving License — Immediate Start</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>George Varughese  ·  <span>IT Operations Service Specialist Application</span>  ·  ADB SAFEGATE, Dubai UAE  ·  April 2026</p>
+</footer>
+</body>
+</html>
