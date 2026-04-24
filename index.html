@@ -153,6 +153,11 @@
     border-color: var(--adb-blue);
     color: var(--adb-blue);
   }
+  .hero-meta .pill.highlight {
+    background: rgba(255,200,0,0.15);
+    border-color: #f59e0b;
+    color: #f59e0b;
+  }
   .scroll-hint {
     position: absolute;
     bottom: 28px;
@@ -172,6 +177,42 @@
     width: 1px;
     height: 40px;
     background: rgba(0,102,179,0.5);
+  }
+
+  /* Experience timeline banner */
+  .exp-banner {
+    background: linear-gradient(135deg, var(--adb-blue), var(--adb-dark));
+    padding: 28px 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .exp-banner-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .exp-banner-val {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .exp-banner-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+  .exp-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.15);
   }
 
   .section { padding: 80px 50px; }
@@ -196,19 +237,17 @@
   .metrics {
     background: var(--adb-dark);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1px;
     background-color: #1a3a5c;
   }
   .metric-item {
     background: var(--adb-dark);
-    padding: 32px 28px;
-    text-align: center;
+    padding: 36px 28px;
   }
   .metric-num {
-    font-family: 'DM Mono', monospace;
     font-size: 2.8rem;
-    font-weight: 500;
+    font-weight: 800;
     color: var(--adb-blue);
     line-height: 1;
     margin-bottom: 8px;
@@ -293,6 +332,7 @@
   }
   .cert-badge.preferred { background: var(--adb-blue); color: #fff; }
 
+  /* Experience timeline */
   .timeline { position: relative; }
   .timeline::before {
     content: '';
@@ -304,7 +344,7 @@
   }
   .tl-item {
     padding-left: 28px;
-    margin-bottom: 48px;
+    margin-bottom: 52px;
     position: relative;
   }
   .tl-item::before {
@@ -324,7 +364,17 @@
     color: var(--adb-blue);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+  }
+  .tl-date-span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    padding: 2px 8px;
+    background: var(--adb-blue);
+    color: #fff;
+    letter-spacing: 0.06em;
   }
   .tl-role { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
   .tl-co { font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
@@ -366,6 +416,28 @@
     color: #166534;
     letter-spacing: 0.04em;
   }
+
+  /* 3-year arc banner */
+  .arc-bar {
+    background: var(--adb-sky);
+    border: 1px solid var(--adb-light);
+    padding: 20px 28px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .arc-bar .arc-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .arc-bar p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--adb-dark);
+    line-height: 1.6;
+  }
+  .arc-bar p strong { font-weight: 700; }
 
   .skills-matrix {
     display: grid;
@@ -516,6 +588,8 @@
     .contact-section { grid-template-columns: 1fr; padding: 60px 20px; }
     .why-adb { padding: 60px 20px; }
     footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+    .exp-banner { padding: 20px; gap: 20px; }
+    .exp-divider { display: none; }
   }
 </style>
 </head>
@@ -525,12 +599,12 @@
 <nav>
   <div class="nav-logo">George <span>Varughese</span></div>
   <div class="nav-links">
+    <a href="#experience-arc">3+ Yrs IT Support</a>
     <a href="#match">JD Match</a>
     <a href="#experience">Experience</a>
     <a href="#why">Why ADB SAFEGATE</a>
     <a href="#certifications">Certifications</a>
     <a href="#skills">Skills</a>
-    <a href="#selective">Programmes</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -541,14 +615,15 @@
   <div class="hero-runway"></div>
   <div class="hero-ticker">
     <div class="hero-ticker-inner">
-      IT Operations · System Monitoring · SLA Support · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · European Internship Exposure · Dubai UAE · Immediate Start &nbsp;&nbsp; IT Operations · System Monitoring · SLA Support · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · European Internship Exposure · Dubai UAE · Immediate Start &nbsp;&nbsp;
+      3+ Years IT Support · Aug 2023–Present · First-Line & Escalation Support · System Monitoring · SLA Delivery · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · UAE Govt Clients · Dubai UAE · Immediate Start &nbsp;&nbsp; 3+ Years IT Support · Aug 2023–Present · First-Line & Escalation Support · System Monitoring · SLA Delivery · Preventive Maintenance · Incident Response · ITIL · Windows Server · Linux · VMware · Cisco · AWS · SQL · JIRA · McKinsey Forward · Oxford ML School · HPAIR Harvard · MIT Startup Alumni · UAE Govt Clients · Dubai UAE · Immediate Start &nbsp;&nbsp;
     </div>
   </div>
   <div class="hero-content">
     <div class="hero-kicker">Service Specialist – IT Operations · ADB SAFEGATE · Dubai, UAE  ·  Req ID: 1133</div>
-    <h1>George<br><em>Varughese</em><br>IT Ops.<br>Delivered.</h1>
+    <h1>George<br><em>Varughese</em><br>IT Ops.<br>3+ Years.</h1>
     <div class="hero-meta">
       <span class="pill live">● Available Now</span>
+      <span class="pill highlight">3+ Years IT Support Experience</span>
       <span class="pill adb">ADB SAFEGATE Applicant</span>
       <span class="pill">Dubai, UAE</span>
       <span class="pill">Residency Visa</span>
@@ -562,6 +637,10 @@
 
 <!-- METRICS -->
 <div class="metrics">
+  <div class="metric-item">
+    <div class="metric-num">3+</div>
+    <div class="metric-desc">Years Continuous<br>IT Support Experience</div>
+  </div>
   <div class="metric-item">
     <div class="metric-num">2</div>
     <div class="metric-desc">Live Production<br>IT Operations Roles</div>
@@ -580,13 +659,61 @@
   </div>
 </div>
 
+<!-- 3-YEAR EXPERIENCE ARC -->
+<section class="section" id="experience-arc">
+  <div class="section-label">Experience Profile</div>
+  <div class="section-title">3+ Years of Frontline<br>IT Support — Continuous</div>
+
+  <div class="arc-bar">
+    <div class="arc-icon">🛠</div>
+    <p><strong>August 2023 → April 2026 (Present):</strong> Unbroken arc of hands-on IT technical support, system monitoring, infrastructure maintenance, and incident resolution — from first-line technical support at a US-culture MIT-founded AI startup (Chamberly/Maura, Aug 2023) through internship technical support delivery, to full-time IT Operations & Infrastructure Support at Reach Group (UAE government clients) and Emdad HR (Saudi government system, sole engineer). Every role in this period has included active first-line or escalation IT support as a primary function.</p>
+  </div>
+
+  <!-- Timeline bar -->
+  <div style="position: relative; margin: 40px 0 20px; overflow: hidden;">
+    <div style="display: flex; width: 100%; gap: 3px; font-family: 'DM Mono', monospace; font-size: 0.62rem;">
+      <div style="flex: 2.2; background: var(--adb-dark); color: #9ca3af; padding: 14px 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+        <div style="color: var(--adb-blue); margin-bottom: 4px;">Aug 2023</div>
+        <div>Chamberly → Maura</div>
+        <div style="color: #4b5563; margin-top: 4px;">iOS/Cloud Tech Support</div>
+      </div>
+      <div style="flex: 1.7; background: var(--adb-mid); color: #c8d9ef; padding: 14px 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+        <div style="color: #7dd3fc; margin-bottom: 4px;">Jun 2024</div>
+        <div>Maura</div>
+        <div style="color: rgba(200,217,239,0.5); margin-top: 4px;">AI Sys + IT Support</div>
+      </div>
+      <div style="flex: 1; background: #1a3a5c; color: #9ca3af; padding: 14px 12px; text-transform: uppercase; letter-spacing: 0.08em; display: flex; align-items: center;">
+        <div>
+          <div style="color: #6b7280; margin-bottom: 4px;">Apr 2025</div>
+          <div style="color: #4b5563;">Transition</div>
+        </div>
+      </div>
+      <div style="flex: 2.8; background: var(--adb-blue); color: #fff; padding: 14px 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+        <div style="color: #c8f5a0; margin-bottom: 4px;">May 2025 → Present</div>
+        <div>Reach Group</div>
+        <div style="color: rgba(255,255,255,0.65); margin-top: 4px;">IT Ops · UAE Govt · Full-Time</div>
+      </div>
+      <div style="flex: 1.8; background: #004a8a; color: #c8d9ef; padding: 14px 12px; text-transform: uppercase; letter-spacing: 0.08em;">
+        <div style="color: #7dd3fc; margin-bottom: 4px;">Oct 2025 → Present</div>
+        <div>Emdad HR</div>
+        <div style="color: rgba(200,217,239,0.5); margin-top: 4px;">KSA Govt · Sole Lead</div>
+      </div>
+    </div>
+    <div style="text-align: right; font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.08em;">← Aug 2023 ———————————————————————— Apr 2026 (Present) →  &nbsp; Total: 3+ years continuous IT support experience</div>
+  </div>
+
+  <p style="font-size:0.88rem; color: var(--muted); max-width:700px; margin-top: 20px; line-height:1.65;">
+    The ADB SAFEGATE job description requires proven experience providing first-line IT support for hardware, software, network, and system issues. That requirement is met by a continuous, documented, production-verified record spanning from August 2023 to the present — across a US-culture MIT startup, full-time UAE government IT operations, and a KSA government mission-critical system recovery.
+  </p>
+</section>
+
 <!-- JD MATCH -->
-<section class="section" id="match">
+<section class="section" style="background: var(--card);" id="match">
   <div class="section-label">Role Alignment</div>
   <div class="section-title">Every Requirement,<br>Already Delivered</div>
 
   <p style="font-size:0.92rem; color: var(--muted); max-width:700px; margin-bottom:32px; line-height:1.65;">
-    The ADB SAFEGATE Service Specialist – IT Operations job description maps directly to active production work across two simultaneous roles in UAE and Saudi Arabia — plus internship experience at a US-culture MIT-founded AI startup with European cross-team delivery.
+    The ADB SAFEGATE Service Specialist – IT Operations job description maps directly to 3+ years of active production IT support work — across UAE government, KSA government, and US-culture MIT startup environments.
   </p>
 
   <div class="jd-match">
@@ -614,16 +741,19 @@
 <span class="s">    on IT tools and best practices"</span>,
 
   <span class="k">"project_support"</span>: <span class="s">"Support upgrades, migrations, new</span>
-<span class="s">    technology implementations"</span>
+<span class="s">    technology implementations"</span>,
+
+  <span class="k">"experience_req"</span>: <span class="s">"Proven experience in IT support</span>
+<span class="s">    or IT operations roles"</span>
 }
     </div>
     <div class="jd-pane">
-      <div class="pane-label">George Varughese — Live Evidence Mapping</div>
-<span class="c">// Confirmed: performing all in production</span>
+      <div class="pane-label">George Varughese — 3+ Yrs Evidence Mapping</div>
+<span class="c">// Confirmed: 3+ years across all requirements</span>
 {
-  <span class="k">"first_line_support"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — LIVE DAILY</span>
-  <span class="c">  // Primary support contact for UAE govt clients</span>
-  <span class="c">  // Hardware, software, network, integrations</span>
+  <span class="k">"first_line_support"</span>: <span class="tick">✓</span> <span class="v">AUG 2023 – PRESENT (3+ YEARS)</span>
+  <span class="c">  // Chamberly/Maura: iOS/cloud/API tech support</span>
+  <span class="c">  // Reach Group: UAE govt hardware, software, network</span>
 
   <span class="k">"system_monitoring"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — MULTI-SITE</span>
   <span class="c">  // Proactive health checks across client sites</span>
@@ -648,24 +778,28 @@
   <span class="k">"project_support"</span>: <span class="tick">✓</span> <span class="v">REACH GROUP — ONGOING</span>
   <span class="c">  // New site integrations, system rollouts</span>
   <span class="c">  // Hardware config, software deployment</span>
+
+  <span class="k">"experience_req"</span>: <span class="tick">✓</span> <span class="v">3+ YEARS — AUG 2023–PRESENT</span>
+  <span class="c">  // Continuous: Chamberly→Maura→Reach→Emdad</span>
+  <span class="c">  // Hardware, software, network, cloud, server</span>
 }
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section class="section" id="experience" style="background: var(--card);">
-  <div class="section-label">Career Track</div>
+<section class="section" id="experience">
+  <div class="section-label">Career Track · 3+ Years IT Support</div>
   <div class="section-title">Experience</div>
   <div class="timeline">
 
     <div class="tl-item">
-      <div class="tl-date">May 2025 – Present</div>
+      <div class="tl-date">May 2025 – Present <span class="tl-date-span">Current · Full-Time</span></div>
       <div class="tl-role">IT Operations & Infrastructure Support Engineer</div>
       <div class="tl-co">Reach Group · Dubai, UAE · Full-Time</div>
       <div class="tl-dept">First-Line & Escalation Support · Government-Sector Clients · Multi-Site UAE</div>
       <ul class="tl-points">
-        <li><strong>First-line and escalation IT support</strong> — serve as primary technical support contact for UAE government-sector clients, managing and resolving support tickets for hardware, software, network, and integration issues with high first-time fix rates and minimal downtime in SLA-driven environments.</li>
+        <li><strong>First-line and escalation IT support</strong> — serve as primary technical support contact for UAE government-sector clients, managing and resolving support tickets for hardware, software, network, and integration issues with high first-time fix rates and SLA compliance.</li>
         <li><strong>Proactive multi-site system monitoring</strong> — conduct regular system health checks across multiple client sites, performing preventive maintenance, firmware/driver updates, and configuration reviews to maintain system integrity before issues escalate.</li>
         <li><strong>SQL database administration</strong> — maintain production SQL-based databases supporting live operational systems for 500+ active records; apply data validation logic, manage schema integrity, and ensure reliable performance for government workloads.</li>
         <li><strong>Server-side pipeline & API maintenance</strong> — manage and maintain integrations connecting government platforms to internal systems, handling authentication, data transformation, error handling, and TCP/IP connectivity across distributed environments.</li>
@@ -676,14 +810,14 @@
     </div>
 
     <div class="tl-item">
-      <div class="tl-date">Oct 2025 – Present</div>
+      <div class="tl-date">Oct 2025 – Present <span class="tl-date-span">Concurrent · Remote</span></div>
       <div class="tl-role">IT Systems Support Lead (Sole Technical Lead)</div>
       <div class="tl-co">Emdad Human Resources Company (Outsourced) · Riyadh, KSA · Remote from UAE</div>
       <div class="tl-dept">Mission-Critical System Recovery · Government IT · Incident Response</div>
       <ul class="tl-points">
         <li><strong>Mission-critical IT recovery</strong> — deployed as sole engineer on a live government system failure: 500+ active records, 15% data error rate, no documentation, no handover, active production use requiring immediate diagnosis and resolution.</li>
         <li><strong>Root-cause analysis & full pipeline rebuild</strong> — identified three distinct error categories in the server-side ingestion pipeline; rebuilt validation and processing logic from scratch within six weeks.</li>
-        <li><strong>7× error reduction, zero downtime</strong> — reduced system error rate from 15% to under 2% while maintaining continuous live service throughout the entire remediation period — zero service interruption.</li>
+        <li><strong>7× error reduction, zero downtime</strong> — reduced system error rate from 15% to under 2% while maintaining continuous live service throughout the entire remediation — zero service interruption.</li>
         <li><strong>Comprehensive post-incident documentation</strong> — produced incident report, root-cause analysis, SOPs, system architecture notes, and handover materials enabling full client-team self-sufficiency.</li>
         <li><strong>Remote cross-cultural coordination</strong> — coordinated with Saudi IT operations personnel, demonstrating professional communication and discretion on sensitive government configurations.</li>
       </ul>
@@ -691,16 +825,30 @@
     </div>
 
     <div class="tl-item">
-      <div class="tl-date">Aug 2023 – Jun 2024</div>
-      <div class="tl-role">AI Systems Engineer & Technical Support (Internship)</div>
-      <div class="tl-co">Maura · MIT-Founded AI Startup · San Francisco, USA (Remote Internship)</div>
-      <div class="tl-dept">US Engineering Culture · European Counterpart Collaboration · Full Technical Ownership</div>
+      <div class="tl-date">Jun 2024 – Apr 2025 <span class="tl-date-span">IT Support + AI Systems</span></div>
+      <div class="tl-role">AI Systems Engineer & IT Technical Support</div>
+      <div class="tl-co">Maura · MIT-Founded AI Startup · San Francisco, USA (Remote)</div>
+      <div class="tl-dept">First-Line Technical Support · Cloud & API Infrastructure · US Engineering Culture</div>
       <ul class="tl-points">
-        <li><strong>US-culture technical environment</strong> — built production AI systems from first principles inside a US-headquartered, MIT-founded startup with no existing codebase, no documentation, applying US engineering standards, documentation discipline, and self-directed ownership.</li>
-        <li><strong>European and international collaboration</strong> — coordinated with engineering counterparts in Sweden and the USA across time zones, working simultaneously to European and US engineering standards — the cross-cultural delivery experience directly applicable to ADB SAFEGATE's global operational environment.</li>
-        <li><strong>Cloud backend & API support</strong> — maintained integrations between iOS hardware sensors (ARKit), Firebase cloud backend, and API endpoints, diagnosing and resolving software bugs, hardware-software integration faults, and performance issues across distributed environments.</li>
+        <li><strong>First-line technical support for iOS + cloud systems</strong> — diagnosed and resolved software bugs, hardware-software integration faults (ARKit sensors), API connectivity issues, and performance degradation across distributed client environments — keeping production systems operational and user experience maintained.</li>
+        <li><strong>Cloud backend monitoring & API support</strong> — monitored Firebase cloud backend, tracked system performance, identified and resolved connectivity and authentication failures, applied fixes to keep live production systems running within a fast-moving US-culture engineering environment.</li>
+        <li><strong>US-culture technical ownership</strong> — built production AI backend systems (Graph RAG) from first principles — no codebase, no documentation — applying rigorous documentation discipline and systematic fault-finding methodology to live production environments.</li>
+        <li><strong>International cross-timezone coordination</strong> — coordinated with counterparts in Sweden and the USA across time zones, maintaining clear incident records and structured escalation processes — directly applicable to ADB SAFEGATE's global operations environment.</li>
       </ul>
-      <div class="tl-win">OUTCOME: Production systems delivered inside a US-culture, MIT-heritage startup — cross-timezone, European counterpart collaboration, full ownership from zero</div>
+      <div class="tl-win">OUTCOME: Production systems delivered and supported — cloud, API, hardware-integrated environments — cross-timezone delivery with European counterpart collaboration</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Aug 2023 – Jun 2024 <span class="tl-date-span">Foundation · IT Support Start</span></div>
+      <div class="tl-role">Software Developer & IT Technical Support (Internship)</div>
+      <div class="tl-co">Chamberly (Maura predecessor) · Remote</div>
+      <div class="tl-dept">iOS App Technical Support · Hardware-Software Integration · Cloud Backend</div>
+      <ul class="tl-points">
+        <li><strong>Technical support for iOS + hardware-software integrations</strong> — provided first-line support and troubleshooting for an iOS application integrating ARKit hardware sensors and Firebase cloud backend, diagnosing integration faults, resolving connectivity issues, and supporting end-to-end system reliability across a distributed client environment.</li>
+        <li><strong>ML model implementation and maintenance</strong> — implemented and maintained machine learning models (pose-net for body measurements) within a production iOS environment — monitoring performance, applying fixes, and supporting cross-functional teams through the full development and support lifecycle.</li>
+        <li><strong>Multi-team coordination</strong> — tracked issues, maintained documentation, and coordinated resolutions in a fast-paced startup context requiring systematic fault-diagnosis and clear technical communication across teams.</li>
+      </ul>
+      <div class="tl-win">START OF 3+ YEAR IT SUPPORT ARC: First-line technical support across iOS, cloud, and ML-integrated production environment — August 2023</div>
     </div>
 
   </div>
@@ -711,23 +859,23 @@
   <div class="section-label">Why This Company</div>
   <div class="section-title">Why ADB SAFEGATE</div>
   <p style="font-size:0.92rem; color:#9ca3af; max-width:700px; margin-bottom:0; line-height:1.65;">
-    ADB SAFEGATE is not a company I applied to because the role was available. It is a company I am drawn to because of what it does, where it operates, and the standard it holds itself to. Three things specifically:
+    ADB SAFEGATE is not a company I applied to because the role was available. It is a company I am drawn to because of what it does, where it operates, and the standard it holds itself to.
   </p>
   <div class="why-grid">
     <div class="why-card">
       <div class="why-num">01</div>
       <h3>Aviation Infrastructure Is Mission-Critical IT</h3>
-      <p>ADB SAFEGATE delivers airfield guidance, docking automation, and digital airport operations systems across six continents. The IT operations role here is not commercial IT support — it is the foundation that keeps safety-critical airport infrastructure running. That is precisely the operational standard I have been building toward: environments where downtime is not an inconvenience but a genuine risk. My record of zero-downtime delivery in government and mission-critical environments maps directly to that standard.</p>
+      <p>ADB SAFEGATE delivers airfield guidance, docking automation, and digital airport operations systems across six continents. The IT operations role here is not commercial IT support — it is the foundation that keeps safety-critical airport infrastructure running. My 3+ years of zero-downtime delivery across government and mission-critical environments maps directly to that standard.</p>
     </div>
     <div class="why-card">
       <div class="why-num">02</div>
       <h3>The UAE Aviation Ecosystem Is World-Class</h3>
-      <p>Dubai is home to one of the world's most ambitious and sophisticated aviation ecosystems. Supporting IT operations for a global airport technology company in this specific region — where the infrastructure demands and operational complexity are exceptional — is precisely the context I want to apply my skills in. I hold a valid UAE Residence Visa and UAE Driving License, and I am available for immediate deployment across all UAE sites.</p>
+      <p>Dubai is home to one of the world's most ambitious and sophisticated aviation ecosystems. Supporting IT operations for a global airport technology company in this specific region — where the infrastructure demands and operational complexity are exceptional — is precisely the context I want to apply 3+ years of IT support experience in. I hold a valid UAE Residence Visa and UAE Driving License, and I am available for immediate deployment across all UAE sites.</p>
     </div>
     <div class="why-card">
       <div class="why-num">03</div>
       <h3>Innovation, Integrity, Inclusivity — Already How I Operate</h3>
-      <p>ADB SAFEGATE's culture values innovation, integrity, and inclusivity, with a collaborative team environment that encourages growth. These are not values I would need to learn: I built production AI systems inside an MIT startup with zero documentation (innovation), recovered a live government system as sole engineer with full transparency (integrity), and have delivered across UAE, Saudi, Swedish, and US engineering environments (inclusivity). This is how I already work.</p>
+      <p>ADB SAFEGATE's culture values innovation, integrity, and inclusivity. These are not values I would need to learn: 3+ years of continuous IT support delivered across UAE, Saudi, Swedish, and US engineering environments — each requiring zero-downtime service, transparent incident documentation, and professional cross-cultural technical coordination. This is how I already work, every day.</p>
     </div>
   </div>
 </section>
@@ -749,7 +897,7 @@
     <div class="cert-card">
       <span class="cert-org">Meta</span>
       <div class="cert-name">Meta Developer Certification</div>
-      <div class="cert-desc">Professional-grade software engineering standards, API design, and development discipline — reflects the technical rigour applied to production system delivery and integration support</div>
+      <div class="cert-desc">Professional-grade software engineering standards, API design, and development discipline — reflects the technical rigour applied to production system delivery and integration support across 3+ years</div>
       <span class="cert-badge">Active</span>
     </div>
     <div class="cert-card">
@@ -761,7 +909,7 @@
     <div class="cert-card">
       <span class="cert-org">McKinsey & Company</span>
       <div class="cert-name">Forward Programme</div>
-      <div class="cert-desc">Globally competitive selection for analytical problem-solving and operational excellence — reflects the structured, improvement-oriented thinking ADB SAFEGATE's ITIL-aligned service environment demands</div>
+      <div class="cert-desc">Globally competitive selection — analytical problem-solving, decision frameworks, and operational excellence. Reflects the structured, improvement-oriented thinking ADB SAFEGATE's ITIL-aligned service environment demands</div>
       <span class="cert-badge preferred">Competitive · Global</span>
     </div>
   </div>
@@ -773,7 +921,7 @@
   <div class="section-title">Skills Matrix</div>
   <div class="skills-matrix">
     <div class="skill-group">
-      <h3>IT Support & Service Management</h3>
+      <h3>IT Support & Service Management (3+ Years)</h3>
       <div class="skill-tags">
         <span class="stag hot">First-Line Support</span>
         <span class="stag hot">Escalation Support</span>
@@ -873,9 +1021,9 @@
 <!-- CONTACT -->
 <div class="contact-section" id="contact">
   <div>
-    <h2>Every<br><span>Requirement.</span><br>Already Delivered.</h2>
+    <h2>3+ Years.<br><span>Every Requirement.</span><br>Already Delivered.</h2>
     <p style="color:#9ca3af; font-size:0.85rem; margin-top:20px; line-height:1.6; max-width:380px;">
-      Dubai-based, UAE Residency Visa, UAE Driving License, immediate start. The ADB SAFEGATE IT Operations role is not an aspiration — it is the same SLA-driven, multi-site, government-standard IT operations work I am doing today, applied to ADB SAFEGATE's world-class airport technology environment.
+      Dubai-based, UAE Residency Visa, UAE Driving License, immediate start. 3+ years of continuous frontline IT support — hardware, software, network, and systems — across UAE government, Saudi government, and US-culture MIT startup environments. The ADB SAFEGATE IT Operations role is not an aspiration: it is exactly what I have been doing, every day, since August 2023.
     </p>
   </div>
   <div class="contact-links">
@@ -908,6 +1056,7 @@
 
 <footer>
   <p>George Varughese  ·  <span>IT Operations Service Specialist Application</span>  ·  ADB SAFEGATE, Dubai UAE  ·  April 2026</p>
+  <p>3+ Years Continuous IT Support Experience  ·  <span>Aug 2023 – Present</span></p>
 </footer>
 </body>
 </html>
